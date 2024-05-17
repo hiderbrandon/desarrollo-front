@@ -13,7 +13,7 @@ const Login = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post(config + "/api-auth/token/", {
+      const response = await axios.post(`${config}/api-auth/token/`, {
         username: username,
         password: password
       }, {
