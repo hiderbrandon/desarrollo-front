@@ -1,0 +1,11 @@
+.modal-custom.show {
+    display: block;
+  }
+  
+  .modal-custom .modal-dialog-centered {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100% - 1rem);
+  }
+  

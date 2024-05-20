@@ -13,8 +13,8 @@ const Register = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    try {
-        const response = await axios.post(`http://localhost:8000/api-auth/register/`, {
+    try {console.log(`${config}/api-auth/register/`)
+        const response = await axios.post(`${config.backUrl}/api-auth/register/`, {
             username: username,
             password: password,
             identificationType: identificationType,

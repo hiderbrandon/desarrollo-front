@@ -12,8 +12,9 @@ const Login = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    console.log(`${config.backUrl}/api-auth/token/`)
     try {
-      const response = await axios.post(`${config}/api-auth/token/`, {
+      const response = await axios.post(`${config.backUrl}/api-auth/token/`, {
         username: username,
         password: password
       }, {
@@ -24,8 +25,9 @@ const Login = () => {
       console.log('Response:', response.data);
       // Guardar el token en localStorage
       localStorage.setItem('refreshToken', response.data.refresh);
+      localStorage.setItem('accessToken', response.data.access);
       // Redirigir a la página de inicio
-      navigate('/');
+      navigate('/UserAdmon');
     } catch (error) {
       console.error('Error:', error);
       setError('Error de autenticación. Verifique sus credenciales.');
