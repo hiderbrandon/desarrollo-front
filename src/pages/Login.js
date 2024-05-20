@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
 
-import {config  } from '../config';
+import { config } from '../config';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -12,7 +13,6 @@ const Login = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(`${config.backUrl}/api-auth/token/`)
     try {
       const response = await axios.post(`${config.backUrl}/api-auth/token/`, {
         username: username,
@@ -22,45 +22,39 @@ const Login = () => {
           'Content-Type': 'application/json'
         }
       });
-      console.log('Response:', response.data);
-      // Guardar el token en localStorage
       localStorage.setItem('refreshToken', response.data.refresh);
       localStorage.setItem('accessToken', response.data.access);
-      // Redirigir a la página de inicio
       navigate('/UserAdmon');
     } catch (error) {
-      console.error('Error:', error);
       setError('Error de autenticación. Verifique sus credenciales.');
     }
   };
 
   return (
-    <div>
-      <h2>Login</h2>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+    <div className="container mt-5">
+      <h2 className="mb-4">Login</h2>
+      {error && <p className="text-danger">{error}</p>}
       <form onSubmit={handleSubmit}>
-        <div>
-          <label>
-            Usuario:
-            <input
-              type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-            />
-          </label>
+        <div className="mb-3">
+          <label className="form-label">Usuario:</label>
+          <input
+            type="text"
+            className="form-control"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+        </div>
+        <div className="mb-3">
+          <label className="form-label">Contraseña:</label>
+          <input
+            type="password"
+            className="form-control"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
         </div>
         <div>
-          <label>
-            Contraseña:
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </label>
-        </div>
-        <div>
-          <button type="submit">Iniciar Sesión</button>
+          <button type="submit" className="btn btn-primary">Iniciar Sesión</button>
         </div>
       </form>
     </div>
