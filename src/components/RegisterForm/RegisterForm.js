@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import axios from 'axios';
 
 const RegisterForm = () => {
   const [formData, setFormData] = useState({
@@ -42,102 +42,108 @@ const RegisterForm = () => {
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label className="form-label">Username:</label>
-          <input 
-            type="text" 
-            name="username" 
-            className="form-control" 
-            value={formData.username} 
-            onChange={handleChange} 
+          <input
+            type="text"
+            name="username"
+            className="form-control"
+            value={formData.username}
+            onChange={handleChange}
           />
         </div>
         <div className="mb-3">
           <label className="form-label">Password:</label>
-          <input 
-            type="password" 
-            name="password" 
-            className="form-control" 
-            value={formData.password} 
-            onChange={handleChange} 
+          <input
+            type="password"
+            name="password"
+            className="form-control"
+            value={formData.password}
+            onChange={handleChange}
           />
         </div>
         <div className="mb-3">
-          <label className="form-label">Identification Type:</label>
-          <input 
-            type="text" 
-            name="identificationType" 
-            className="form-control" 
-            value={formData.identificationType} 
-            onChange={handleChange} 
-          />
+          <label className="form-label">Tipo de identificación:</label>
+          <select
+            name="identificationType"
+            className="form-select"
+            value={formData.identificationType}
+            onChange={handleChange}
+          >
+            <option value="">Seleccione...</option>
+            <option value="CC">Cédula de ciudadanía (CC)</option>
+            <option value="CE">Cédula de extranjería (CE)</option>
+          </select>
         </div>
         <div className="mb-3">
           <label className="form-label">Identification Number:</label>
-          <input 
-            type="text" 
-            name="identificationNumber" 
-            className="form-control" 
-            value={formData.identificationNumber} 
-            onChange={handleChange} 
+          <input
+            type="text"
+            name="identificationNumber"
+            className="form-control"
+            value={formData.identificationNumber}
+            onChange={handleChange}
           />
         </div>
         <div className="mb-3">
           <label className="form-label">First Name:</label>
-          <input 
-            type="text" 
-            name="firstName" 
-            className="form-control" 
-            value={formData.firstName} 
-            onChange={handleChange} 
+          <input
+            type="text"
+            name="firstName"
+            className="form-control"
+            value={formData.firstName}
+            onChange={handleChange}
           />
         </div>
         <div className="mb-3">
           <label className="form-label">Last Name:</label>
-          <input 
-            type="text" 
-            name="lastName" 
-            className="form-control" 
-            value={formData.lastName} 
-            onChange={handleChange} 
+          <input
+            type="text"
+            name="lastName"
+            className="form-control"
+            value={formData.lastName}
+            onChange={handleChange}
           />
         </div>
         <div className="mb-3">
           <label className="form-label">User Type:</label>
-          <input 
-            type="text" 
-            name="userType" 
-            className="form-control" 
-            value={formData.userType} 
-            onChange={handleChange} 
+          <input
+            type="text"
+            name="userType"
+            className="form-control"
+            value={formData.userType}
+            onChange={handleChange}
           />
         </div>
         <div className="mb-3">
           <label className="form-label">Gender:</label>
-          <input 
-            type="text" 
-            name="gender" 
-            className="form-control" 
-            value={formData.gender} 
-            onChange={handleChange} 
-          />
+          <select
+            name="gender"
+            className="form-select"
+            value={formData.gender}
+            onChange={handleChange}
+          >
+            <option value="">Seleccione...</option>
+            <option value="M">Masculino (M)</option>
+            <option value="F">Femenino (F)</option>
+          </select>
         </div>
         <div className="mb-3">
           <label className="form-label">Address:</label>
-          <input 
-            type="text" 
-            name="address" 
-            className="form-control" 
-            value={formData.address} 
-            onChange={handleChange} 
+          <input
+            type="text"
+            name="address"
+            className="form-control"
+            value={formData.address}
+            onChange={handleChange}
           />
         </div>
         <div className="mb-3">
           <label className="form-label">Phone Number:</label>
-          <input 
-            type="text" 
-            name="phoneNumber" 
-            className="form-control" 
-            value={formData.phoneNumber} 
-            onChange={handleChange} 
+          <input
+            type="text"
+            name="phoneNumber"
+            className="form-control"
+            value={formData.phoneNumber}
+            onChange={handleChange}
           />
         </div>
         <button type="submit" className="btn btn-primary">Register</button>

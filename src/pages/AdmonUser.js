@@ -8,7 +8,6 @@ const AdmonUser = () => {
   const [users, setUsers] = useState([]);
   const [showModal, setShowModal] = useState(false);
 
-  // Fetch Users List 
   useEffect(() => {
     const fetchUsers = async () => {
       try {
@@ -26,13 +25,16 @@ const AdmonUser = () => {
     fetchUsers();
   }, []);
 
-  const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
+  const handleClose = () => setShowModal(false);
+
+  const handleDeleteUser = (userId) => {
+    setUsers(users.filter(user => user.id !== userId));
+  };
 
   return (
     <div>
       <h1>Dashboard</h1>
-
       <button className="btn btn-primary" onClick={handleShow}>
         Register New User
       </button>
@@ -58,7 +60,7 @@ const AdmonUser = () => {
         </div>
       )}
 
-      <List users={users} />
+      <List users={users} onDelete={handleDeleteUser} />
     </div>
   );
 };
