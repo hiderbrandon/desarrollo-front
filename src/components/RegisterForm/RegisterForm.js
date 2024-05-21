@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import axios from 'axios';
 
 const RegisterForm = () => {
   const [formData, setFormData] = useState({
@@ -23,17 +22,7 @@ const RegisterForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const response = await axios.post('http://localhost:8000/api-auth/register/', formData, {
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
-      // Handle response as needed
-      console.log(response.data);
-    } catch (error) {
-      console.error('Error registering user:', error);
-    }
+    // Aquí iría tu lógica para enviar los datos
   };
 
   return (
@@ -115,16 +104,13 @@ const RegisterForm = () => {
         </div>
         <div className="mb-3">
           <label className="form-label">Gender:</label>
-          <select
+          <input
+            type="text"
             name="gender"
-            className="form-select"
+            className="form-control"
             value={formData.gender}
             onChange={handleChange}
-          >
-            <option value="">Seleccione...</option>
-            <option value="M">Masculino (M)</option>
-            <option value="F">Femenino (F)</option>
-          </select>
+          />
         </div>
         <div className="mb-3">
           <label className="form-label">Address:</label>

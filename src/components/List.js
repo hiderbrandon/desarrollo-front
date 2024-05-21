@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Modal, Button } from 'react-bootstrap';
 
 const List = ({ users, onDelete }) => {
+  const [showModal, setShowModal] = useState(false);
+  const [editUserId, setEditUserId] = useState(null);
+
   const handleDelete = async (userId) => {
     try {
       const token = localStorage.getItem('accessToken');
@@ -19,6 +23,18 @@ const List = ({ users, onDelete }) => {
     } catch (error) {
       console.error('Error deleting user:', error);
     }
+  };
+
+  const handleEdit = (userId) => {
+    // Abre el modal y establece el ID del usuario que se está editando
+    setEditUserId(userId);
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    // Cierra el modal y restablece el ID del usuario
+    setShowModal(false);
+    setEditUserId(null);
   };
 
   return (
@@ -42,17 +58,41 @@ const List = ({ users, onDelete }) => {
                     <p className="mb-0"><strong>Email:</strong> {user.email}</p>
                   </div>
                 </div>
-                <button
-                  className="btn btn-danger mt-auto"
-                  onClick={() => handleDelete(user.id)}
-                >
-                  Borrar
-                </button>
+                <div className="d-flex justify-content-between">
+                  <button
+                    className="btn btn-danger"
+                    onClick={() => handleDelete(user.id)}
+                  >
+                    Borrar
+                  </button>
+                  <button
+                    className="btn btn-primary"
+                    onClick={() => handleEdit(user.id)}
+                  >
+                    Editar
+                  </button>
+                </div>
               </div>
             </div>
           </div>
         ))}
       </div>
+
+      {/* Modal para editar */}
+      <Modal show={showModal} onHide={handleCloseModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Editar Usuario</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {/* Contenido del modal */}
+          <p>Hola Mundo</p>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseModal}>
+            Cerrar
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };
