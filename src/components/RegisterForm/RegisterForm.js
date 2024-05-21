@@ -20,12 +20,14 @@ const RegisterForm = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    console.log(`name and value `,{ name, value } )
     setFormData({ ...formData, [name]: value });
   };
 
 const handleSubmit = async (e) => {
   e.preventDefault();
   try {
+    console.log(`name and value `,formData)
     const response = await axios.post('http://localhost:8000/api-auth/register/', formData, {
       headers: {
         'Content-Type': 'application/json'

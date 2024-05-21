@@ -15,18 +15,14 @@ const UserModal = ({ isOpen, onClose, userId }) => {
           console.error('Token not found in localStorage');
           return;
         }
-        console.log('userId: USERMODAL',userId );
-        const response = await axios.get(`${config.backUrl}/api-auth/profile/`, {
+        const response = await axios.get(`${config.backUrl}/api-auth/profile/${userId}`, {
           headers: {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'
           },
-          data: {
-            user_id: userId
-          }
         });
         // Suponiendo que response.data es un objeto que contiene los datos del usuario
-        console.log('RESPONSE:', JSON.stringify(response.data, null, 2));
+
         setUserData(response.data);
       } catch (error) {
         console.error('Error fetching user data:', error);
@@ -38,7 +34,7 @@ const UserModal = ({ isOpen, onClose, userId }) => {
     }
   }, [isOpen, userId]); // Se ejecuta cuando isOpen o userId cambian
   
-  
+   console.log('UserData',userData );
 
   return (
     <div className={`modal fade${isOpen ? ' show d-block' : ''}`} tabIndex="-1" role="dialog" aria-labelledby="userModalLabel" aria-hidden={!isOpen}>
