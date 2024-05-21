@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const RegisterForm = () => {
@@ -20,10 +21,21 @@ const RegisterForm = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    // Aquí iría tu lógica para enviar los datos
-  };
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  try {
+    const response = await axios.post('http://localhost:8000/api-auth/register/', formData, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    console.log('Response:', response.data);
+    // Aquí podrías agregar lógica adicional, como redireccionar a una página de éxito, mostrar un mensaje, etc.
+  } catch (error) {
+    console.error('Error:', error);
+    // Aquí podrías manejar errores, como mostrar un mensaje de error al usuario
+  }
+};
 
   return (
     <div className="container mt-5">

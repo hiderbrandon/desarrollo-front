@@ -5,7 +5,7 @@ import { Modal, Button } from 'react-bootstrap';
 
 const List = ({ users, onDelete }) => {
   const [showModal, setShowModal] = useState(false);
-  const [editUserId, setEditUserId] = useState(null);
+  const [selectedUserId, setSelectedUserId] = useState(null);
 
   const handleDelete = async (userId) => {
     try {
@@ -26,15 +26,15 @@ const List = ({ users, onDelete }) => {
   };
 
   const handleEdit = (userId) => {
-    // Abre el modal y establece el ID del usuario que se está editando
-    setEditUserId(userId);
+    // Abrir el modal y establecer el ID del usuario seleccionado
     setShowModal(true);
+    setSelectedUserId(userId);
   };
 
   const handleCloseModal = () => {
-    // Cierra el modal y restablece el ID del usuario
+    // Cerrar el modal y restablecer el ID del usuario seleccionado
     setShowModal(false);
-    setEditUserId(null);
+    setSelectedUserId(null);
   };
 
   return (
@@ -78,14 +78,13 @@ const List = ({ users, onDelete }) => {
         ))}
       </div>
 
-      {/* Modal para editar */}
+      {/* Modal para mostrar el ID del usuario seleccionado */}
       <Modal show={showModal} onHide={handleCloseModal}>
         <Modal.Header closeButton>
-          <Modal.Title>Editar Usuario</Modal.Title>
+          <Modal.Title>ID del Usuario</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {/* Contenido del modal */}
-          <p>Hola Mundo</p>
+          <p>El ID del usuario seleccionado es: {selectedUserId}</p>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleCloseModal}>
