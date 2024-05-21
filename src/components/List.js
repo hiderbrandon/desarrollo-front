@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Modal, Button } from 'react-bootstrap';
+import UserModal from './UserModal';
+
+import { config } from '../config';
 
 const List = ({ users, onDelete }) => {
   const [showModal, setShowModal] = useState(false);
@@ -10,14 +12,14 @@ const List = ({ users, onDelete }) => {
   const handleDelete = async (userId) => {
     try {
       const token = localStorage.getItem('accessToken');
-      await axios.delete('http://localhost:8000/api-auth/profile/delete/', {
+      await axios.delete(`${config.backUrl}/api-auth/profile/delete/`, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
         },
         data: {
           user_id: userId
-        }
+        }   
       });
       onDelete(userId); // Llamar a la función onDelete para actualizar la lista de usuarios
     } catch (error) {
@@ -78,20 +80,9 @@ const List = ({ users, onDelete }) => {
         ))}
       </div>
 
-      {/* Modal para mostrar el ID del usuario seleccionado */}
-      <Modal show={showModal} onHide={handleCloseModal}>
-        <Modal.Header closeButton>
-          <Modal.Title>ID del Usuario</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <p>El ID del usuario seleccionado es: {selectedUserId}</p>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseModal}>
-            Cerrar
-          </Button>
-        </Modal.Footer>
-      </Modal>
+      {/* Modal para mostrar los detalles del usuario */
+      console.log(`selectedUserId ON LIST ${selectedUserId}`)}
+      <UserModal isOpen={showModal} onClose={handleCloseModal} userId={selectedUserId} />
     </div>
   );
 };
