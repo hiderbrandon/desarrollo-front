@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const RegisterForm = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: '',
     password: '',
@@ -30,10 +32,10 @@ const handleSubmit = async (e) => {
       }
     });
     console.log('Response:', response.data);
-    // Aquí podrías agregar lógica adicional, como redireccionar a una página de éxito, mostrar un mensaje, etc.
+    navigate('/')
   } catch (error) {
     console.error('Error:', error);
-    // Aquí podrías manejar errores, como mostrar un mensaje de error al usuario
+   
   }
 };
 
